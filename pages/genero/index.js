@@ -1,31 +1,43 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Form, useForm } from 'react-hook-form';
 
 export default function Home() {
-  
-
   return (
-    <div className="">
-      <h1 className="text-center mt-5 font-bold text-2xl">Cadastro de Gênero</h1>
+    <div className="min-h-screen bg-white p-8 flex flex-col items-center">
+      <h1 className="text-center mt-5 font-extrabold text-3xl text-gray-800">Gênero de Filmes</h1>
+      
+      <div className="flex justify-end w-full mb-5">
+        <Link href="/genero/novo">
+          <div className="transition duration-300 hover:bg-blue-500 hover:border-blue-700 border border-blue-700 bg-blue-800 shadow-lg rounded-lg text-white text-lg py-2 px-4">
+            <span>Cadastrar gênero</span>
+          </div>
+        </Link>
+      </div>
 
-      <form className="flex flex-col w-52 border-2 border-black-100 p-2">
-        <label>Nome do gênero</label>
-        <input className="border-2 border-red-100 " id="sobrenome" type="text" autoComplete="sobrenome"/>
-
-
-      </form>
-
-<Link href='/genero/novo'>
-    <div className="hover:bg-slate-300  hover:border-gray-600 col-span-1 border border-gray-400 bg-gray-300 h-24 rounded-md shadow-lg items-center flex justify-center m-2 flex-col shadow-blue-300 p-2 text-center">
-
-    <span className="">Cadastrar genero</span>
+      <div className="overflow-x-auto w-full">
+        <div className="inline-block min-w-full py-2 align-middle">
+          <table className="min-w-full divide-y divide-gray-300 bg-white rounded-lg shadow-md">
+            <thead className="bg-blue-400 text-white">
+              <tr>
+                <th
+                  scope="col"
+                  className="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide"
+                >
+                  Gênero
+                </th>
+                <th
+                  scope="col"
+                  className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide"
+                >
+                  Ações
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-300">
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </Link>
-
-    </div>
-  )
+  );
 }

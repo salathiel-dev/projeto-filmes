@@ -2,22 +2,27 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="">
-        <h1 className="text-center mt-5 font-bold text-2xl">Gerenciamento de Filmes</h1>
-        <div className="m-5 flex flex-row gap-5 h-100"> 
-          <ClassCard label="Genêro" description="Cadastro de Gênero" href="/genero" />
-          <ClassCard label="Filmes" description="Cadastro de Filmes" href="/filmes" />
-        </div>
-
+    <main className="min-h-screen bg-blue-40 p-8">
+      <h1 className="text-center mt-5 font-extrabold text-3xl text-black-800">
+        Gerenciamento de Filmes
+      </h1>
+      <div className="mt-10 grid grid-cols-2 gap-6">
+        <ClassCard label="Gênero" description="Gerenciar Gêneros" href="/genero" />
+        <ClassCard label="Filmes" description="Gerenciar Filmes" href="/filmes" />
+      </div>
     </main>
   );
 }
 
-function ClassCard({label, description, href=""}) {
-  return <Link href={href}>
-    <div className="hover:bg-slate-300  hover:border-gray-600 col-span-1 border border-gray-400 bg-gray-300 h-24 rounded-md shadow-lg items-center flex justify-center m-2 flex-col shadow-blue-300 p-2 text-center">
-    <span className="text-blue-950 font-bold text-lg">{label}</span>
-    <span className="">{description}</span>
-    </div>
-  </Link>
+function ClassCard({ label, description, href = "" }) {
+  return (
+    <Link href={href}>
+      <div className="hover:bg-blue-200 hover:border-blue-400 border border-black-300 bg-white h-28 rounded-lg shadow-lg items-center flex justify-center m-4 flex-col transform transition-transform duration-200 hover:scale-105 p-4 text-center">
+        <span className="text-black-400 font-semibold text-xl mb-1">
+          {label}
+        </span>
+        <span className="text-black-700 text-sm">{description}</span>
+      </div>
+    </Link>
+  );
 }
