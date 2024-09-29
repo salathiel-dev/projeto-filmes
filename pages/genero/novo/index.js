@@ -17,8 +17,26 @@ export default function Home() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+    const response = await fetch("/api/generos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log('Cadastro de gênero bem-sucedido:', result);
+    } else {
+      const errorData = await response.json();
+      console.error('Erro ao cadastrar o gênero:', errorData);
+    }
+  } catch (error) {
+      console.error('Erro ao realizar o request', error);
+    }
   };
 
   return (

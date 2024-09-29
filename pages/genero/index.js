@@ -2,6 +2,8 @@
 import Link from "next/link";
 
 export default function Home() {
+
+
   return (
     <div className="min-h-screen bg-white p-8 flex flex-col items-center">
       <h1 className="text-center mt-5 font-extrabold text-3xl text-gray-800">Gênero de Filmes</h1>

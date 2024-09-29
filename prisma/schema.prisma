@@ -14,19 +14,20 @@ datasource db {
 }
 
 model Genero {
-  id      Int     @id @default(autoincrement())
-  nome    String  @unique
-  filmes  Filme[]
+  id        Int     @id @default(autoincrement())
+  nome      String  @unique
+  descricao String?
+  filmes    Filme[]
 }
 
 model Filme {
-  id         Int     @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   titulo     String
   ano        Int
   lancamento DateTime
   diretor    String
   generoId   Int
-  genero     Genero  @relation(fields: [generoId], references: [id])
+  genero     Genero   @relation(fields: [generoId], references: [id])
 
   @@unique([titulo, ano])
 }
