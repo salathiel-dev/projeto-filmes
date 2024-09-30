@@ -2,6 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/genero/editar/[id]": "pages/genero/editar/[id].js",
-  "/genero": "pages/genero.js"
+  "/genero": "pages/genero.js",
+  "/genero/novo": "pages/genero/novo.js",
+  "/api/generos": "pages/api/generos.js",
+  "/": "pages/index.js"
 }
