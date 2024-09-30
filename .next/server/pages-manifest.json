@@ -3,5 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/genero": "pages/genero.js",
-  "/genero/novo": "pages/genero/novo.js"
+  "/genero/novo": "pages/genero/novo.js",
+  "/api/generos": "pages/api/generos.js"
 }
