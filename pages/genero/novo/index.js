@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
 
-// Esquema de validação com Yup
+
 const schema = yup.object().shape({
   nome: yup.string().required("Nome do gênero é obrigatório"),
   descricao: yup.string().required("Descrição é obrigatória"),
@@ -13,7 +13,7 @@ const schema = yup.object().shape({
 
 export default function EditGenero() {
   const router = useRouter();
-  const { id } = router.query; // Obtém o ID da URL
+  const { id } = router.query;
   const [genero, setGenero] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,14 +26,13 @@ export default function EditGenero() {
     resolver: yupResolver(schema),
   });
 
-  // Buscar o gênero pelo ID quando a página carregar
   useEffect(() => {
     if (id) {
       async function fetchGenero() {
         const res = await fetch(`/api/generos/${id}`);
         const data = await res.json();
         setGenero(data);
-        reset(data); // Preencher o formulário com os dados existentes
+        reset(data);
         setLoading(false);
       }
 
@@ -53,7 +52,7 @@ export default function EditGenero() {
 
       if (response.ok) {
         console.log("Gênero atualizado com sucesso!");
-        router.push("/generos"); // Redireciona para a lista de gêneros
+        router.push("/generos"); 
       } else {
         const errorData = await response.json();
         console.error("Erro ao atualizar o gênero:", errorData);
