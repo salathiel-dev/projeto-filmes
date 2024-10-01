@@ -2,8 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/genero": "pages/genero.js",
-  "/genero/novo": "pages/genero/novo.js",
-  "/api/generos": "pages/api/generos.js",
-  "/": "pages/index.js"
+  "/": "pages/index.js",
+  "/filmes": "pages/filmes.js",
+  "/filmes/novo": "pages/filmes/novo.js",
+  "/api/filmes": "pages/api/filmes.js",
+  "/api/generos": "pages/api/generos.js"
 }

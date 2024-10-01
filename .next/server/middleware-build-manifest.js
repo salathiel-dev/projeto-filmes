@@ -24,15 +24,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/genero": [
+    "/filmes": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/genero.js"
+      "static/chunks/pages/filmes.js"
     ],
-    "/genero/novo": [
+    "/filmes/novo": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/genero/novo.js"
+      "static/chunks/pages/filmes/novo.js"
     ]
   },
   "ampFirstPages": []

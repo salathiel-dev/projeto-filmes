@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
+import {useEffect, useState} from "react";
 
 const generos = [
 ];
@@ -9,12 +10,30 @@ const generos = [
 const schema = yup.object().shape({
   titulo: yup.string().required("Título é obrigatório"),
   ano: yup.number().min(1900, "Ano deve ser maior que 1900").required("Ano é obrigatório"),
-  lancamento: yup.string().required("Lançamento é obrigatório"), 
+  sinopse: yup.string().required("A sinopse é obrigatória"),
   diretor: yup.string().required("Diretor é obrigatório"),
-  genero: yup.string().required("Gênero é obrigatório"),
+  genero: yup.number().required("Gênero é obrigatório"),
 });
 
-export default function CadastroFilmes() {
+export default function Home() {
+  const [generos, setGeneros] = useState([]);
+  useEffect(() => {
+    const fetchGeneros = async () => {
+      try {
+        const response = await fetch("/api/generos");
+        if (response.ok) {
+          const data = await response.json();
+          setGeneros(data);
+        } else {
+          console.error('Erro ao buscar gêneros:', response);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar gêneros:', error);
+      }
+    };
+    fetchGeneros();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -24,7 +43,31 @@ export default function CadastroFilmes() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    fetch("/api/filmes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        titulo: data.titulo,
+        ano: data.ano,
+        sinopse: data.sinopse,
+        diretor: data.diretor,
+        generoId: data.genero,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return response.json().then((error) => Promise.reject(error));
+      })
+      .then((result) => {
+        console.log('Cadastro de filme bem-sucedido:', result);
+      })
+      .catch((error) => {
+        console.error('Erro ao cadastrar o filme:', error);
+      });
   };
 
   return (
@@ -55,15 +98,15 @@ export default function CadastroFilmes() {
         />
         {errors.ano && <span className="text-red-500 text-sm">{errors.ano.message}</span>}
 
-        <label htmlFor="lancamento" className="mt-4 mb-2 font-semibold text-gray-700">Lançamento</label>
+        <label htmlFor="sinopse" className="mt-4 mb-2 font-semibold text-gray-700">Sinopse</label>
         <input
-          {...register("lancamento")}
-          className={`border-2 p-3 rounded-lg transition duration-200 ${errors.lancamento ? 'border-red-500' : 'border-gray-300 focus:border-blue-500'}`}
-          id="lancamento"
+          {...register("sinopse")}
+          className={`border-2 p-3 rounded-lg transition duration-200 ${errors.sinopse ? 'border-red-500' : 'border-gray-300 focus:border-blue-500'}`}
+          id="sinopse"
           type="text" 
-          placeholder="Digite as informações de Lançamento"
+          placeholder="Digite a sinopse do filme"
         />
-        {errors.lancamento && <span className="text-red-500 text-sm">{errors.lancamento.message}</span>}
+        {errors.sinopse && <span className="text-red-500 text-sm">{errors.sinopse.message}</span>}
 
         <label htmlFor="diretor" className="mt-4 mb-2 font-semibold text-gray-700">Diretor</label>
         <input
@@ -100,3 +143,4 @@ export default function CadastroFilmes() {
     </div>
   );
 }
+

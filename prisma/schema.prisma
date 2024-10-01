@@ -21,13 +21,13 @@ model Genero {
 }
 
 model Filme {
-  id         Int      @id @default(autoincrement())
-  titulo     String
-  ano        Int
-  lancamento DateTime
-  diretor    String
-  generoId   Int
-  genero     Genero   @relation(fields: [generoId], references: [id])
+  id       Int     @id @default(autoincrement())
+  titulo   String
+  ano      Int
+  sinopse  String?
+  diretor  String
+  generoId Int
+  genero   Genero  @relation(fields: [generoId], references: [id])
 
   @@unique([titulo, ano])
 }
