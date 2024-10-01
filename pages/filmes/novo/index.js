@@ -3,6 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
 import {useEffect, useState} from "react";
+import {toast, Toaster} from "react-hot-toast";
+import {router} from "next/client";
 
 const schema = yup.object().shape({
     titulo: yup.string().required("Título é obrigatório"),
@@ -61,14 +63,21 @@ export default function Home() {
             })
             .then((result) => {
                 console.log('Cadastro de filme bem-sucedido:', result);
+                toast.success('Filme cadastrado com sucesso!');
+                setTimeout(() => {
+                    router.replace('/filmes');
+                }, 2000);
+
             })
             .catch((error) => {
                 console.error('Erro ao cadastrar o filme:', error);
+                toast.error('Erro ao cadastrar o filme');
             });
     };
 
     return (
         <div className="min-h-screen bg-white p-8 flex flex-col items-center">
+            <Toaster position="top-right" />
             <h1 className="text-center mt-5 font-extrabold text-3xl text-gray-800">Cadastro de Filmes</h1>
 
             <form

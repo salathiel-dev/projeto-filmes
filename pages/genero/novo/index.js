@@ -3,7 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/router"; 
+import { useRouter } from "next/router";
+import {toast, Toaster} from "react-hot-toast";
 
 const schema = yup.object().shape({
   nome: yup.string().required("Nome do gênero é obrigatório"),
@@ -34,9 +35,11 @@ export default function Home() {
       if (response.ok) {
         const result = await response.json();
         console.log('Cadastro de gênero bem-sucedido:', result);
-        setSubmitSuccess("Gênero cadastrado com sucesso!");
-        
-        router.push("/genero/");
+        // setSubmitSuccess("Gênero cadastrado com sucesso!");
+        toast.success('Gênero cadastrado com sucesso!');
+        setTimeout(() => {
+          router.push("/genero/");
+        }, 2000);
       } else {
         const errorData = await response.json();
         console.error('Erro ao cadastrar o gênero:', errorData);
@@ -44,13 +47,14 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Erro ao realizar o request', error);
-      setSubmitSuccess(`Erro de rede: ${error.message}`); 
+      // setSubmitSuccess(`Erro de rede: ${error.message}`);
     }
   };
 
   return (
     <main className="min-h-screen bg-gradient-to-r from-gary-400 to-gray-600 p-8 flex items-center justify-center">
     <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+      <Toaster position="top-right" />
       <h1 className="text-center mb-6 font-extrabold text-2xl text-gray-800">Cadastrar Gênero de Filmes</h1>
       
         {submitSuccess && (
