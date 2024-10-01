@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router"; 
 
 const schema = yup.object().shape({
   nome: yup.string().required("Nome do gênero é obrigatório"),
@@ -9,6 +11,8 @@ const schema = yup.object().shape({
 });
 
 export default function Home() {
+  const router = useRouter(); 
+  const [submitSuccess, setSubmitSuccess] = useState(null);
   const {
     register,
     handleSubmit,
@@ -19,35 +23,43 @@ export default function Home() {
 
   const onSubmit = async (data) => {
     try {
-    const response = await fetch("/api/generos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+      const response = await fetch("/api/generos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (response.ok) {
-      const result = await response.json();
-      console.log('Cadastro de gênero bem-sucedido:', result);
-    } else {
-      const errorData = await response.json();
-      console.error('Erro ao cadastrar o gênero:', errorData);
-    }
-  } catch (error) {
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Cadastro de gênero bem-sucedido:', result);
+        setSubmitSuccess("Gênero cadastrado com sucesso!");
+        
+        router.push("/genero/");
+      } else {
+        const errorData = await response.json();
+        console.error('Erro ao cadastrar o gênero:', errorData);
+        setSubmitSuccess(`Erro ao cadastrar: ${errorData.message || 'Erro desconhecido'}`);
+      }
+    } catch (error) {
       console.error('Erro ao realizar o request', error);
+      setSubmitSuccess(`Erro de rede: ${error.message}`); 
     }
   };
 
   return (
     <main className="min-h-screen bg-gradient-to-r from-gary-400 to-gray-600 p-8 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-        <h1 className="text-center mb-6 font-extrabold text-2xl text-gray-800">Cadastrar Gênero de Filmes</h1>
-        
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col"
-        >
+    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+      <h1 className="text-center mb-6 font-extrabold text-2xl text-gray-800">Cadastrar Gênero de Filmes</h1>
+      
+        {submitSuccess && (
+          <div className={`text-center mb-4 ${submitSuccess.includes('sucesso') ? 'text-green-500' : 'text-red-500'}`}>
+            {submitSuccess}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           <label htmlFor="nome" className="mb-2 font-semibold text-gray-700">Nome do Gênero</label>
           <input
             {...register("nome")}
@@ -81,4 +93,3 @@ export default function Home() {
     </main>
   );
 }
-
