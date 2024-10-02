@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
+    const { id } = req.query; 
+
     if (req.method === 'POST') {
         const { titulo, ano, sinopse, diretor, generoId } = req.body;
         if (!titulo || !ano || !sinopse || !diretor || !generoId) {
@@ -19,10 +21,22 @@ export default async function handler(req, res) {
         }
     } else if (req.method === 'GET') {
         try {
-            const filmes = await prisma.filme.findMany(
-                { include: { genero: true, }, }
-            );
-            res.status(200).json(filmes);
+            if (id) {
+                const filme = await prisma.filme.findUnique({
+                    where: { id: Number(id) },
+                    include: { genero: true }, 
+                });
+
+                if (!filme) {
+                    return res.status(404).json({ message: 'Filme não encontrado' });
+                }
+                res.status(200).json(filme);
+            } else {
+                const filmes = await prisma.filme.findMany({
+                    include: { genero: true }, 
+                });
+                res.status(200).json(filmes);
+            }
         } catch (error) {
             console.error('Erro ao buscar filmes:', error);
             res.status(500).json({ error: 'Erro ao buscar filmes', details: error.message });

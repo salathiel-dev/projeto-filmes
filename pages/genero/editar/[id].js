@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// Validação de formulário com Yup
 const schema = yup.object().shape({
   nome: yup.string().required("Nome do gênero é obrigatório"),
   descricao: yup.string().required("Descrição é obrigatória"),
@@ -13,10 +12,10 @@ const schema = yup.object().shape({
 
 export default function EditarGenero() {
   const router = useRouter();
-  const { id } = router.query; // Pegando o ID do gênero da URL
+  const { id } = router.query; 
   const [submitSuccess, setSubmitSuccess] = useState(null);
-  const [loading, setLoading] = useState(true); // Para controlar o carregamento
-  const [generoData, setGeneroData] = useState(null); // Para armazenar o gênero atual
+  const [loading, setLoading] = useState(true); 
+  const [generoData, setGeneroData] = useState(null);
 
   const {
     register,
@@ -26,8 +25,6 @@ export default function EditarGenero() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  // Função para buscar o gênero existente baseado no ID
   
   useEffect(() => {
     if (id) {
@@ -36,10 +33,9 @@ export default function EditarGenero() {
           const response = await fetch(`/api/generos?id=${id}`);
           const data = await response.json();
   
-          // Preenche o formulário com os dados do gênero
           setValue("nome", data.nome);
           setValue("descricao", data.descricao);
-          setLoading(false); // Desativa o estado de carregamento
+          setLoading(false); 
         } catch (error) {
           console.error("Erro ao buscar gênero:", error);
           setSubmitSuccess("Erro ao buscar os dados do gênero.");
@@ -51,7 +47,6 @@ export default function EditarGenero() {
     }
   }, [id, setValue]);
 
-  // Função para lidar com o envio do formulário atualizado
   const onSubmit = async (data) => {
     try {
       const response = await fetch(`/api/generos`, {
@@ -76,7 +71,7 @@ export default function EditarGenero() {
   };
 
   if (loading) {
-    return <div>Carregando...</div>; // Mostra um indicador de carregamento enquanto busca o gênero
+    return <div>Carregando...</div>; 
   }
 
   return (

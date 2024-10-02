@@ -24,7 +24,7 @@ export default function Home() {
 
     function handleEdit(filme) {
         console.log("Editar filme", filme);
-        router.push(`/filmes/${filme.id}`);
+        router.push(`/filmes/editar/${filme.id}`);
     }
 
     function handleRemoveFilme(filme) {

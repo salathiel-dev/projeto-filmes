@@ -9,6 +9,11 @@ self.__BUILD_MANIFEST = {
   "lowPriorityFiles": [],
   "rootMainFiles": [],
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -19,15 +24,20 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/genero": [
+    "/filmes": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/genero.js"
+      "static/chunks/pages/filmes.js"
     ],
-    "/genero/novo": [
+    "/filmes/editar/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/genero/novo.js"
+      "static/chunks/pages/filmes/editar/[id].js"
+    ],
+    "/filmes/novo": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/filmes/novo.js"
     ]
   },
   "ampFirstPages": []

@@ -26,7 +26,8 @@ export default function Home() {
   }
 
   function handleRemoveGenero(genero) {
-    fetch(`/api/generos`, {
+    console.log("Remover Genero", genero);
+    fetch("/api/generos", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
