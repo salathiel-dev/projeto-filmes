@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import {toast, Toaster} from "react-hot-toast";
 
 export default function Home() {
   const [generos, setGeneros] = useState([]);
@@ -22,22 +23,31 @@ export default function Home() {
 
   function handleRemoveGenero(genero) {
     console.log("Remover Genero", genero);
-    fetch("/api/generos", {
+      fetch("/api/generos", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ id: genero.id }),
     })
+      .then((res) => {
+        if (res.status === 500) {
+          throw new Error("Erro ao remover gênero");
+        }
+      })
       .then(() => {
         setGeneros((prev) => prev.filter((g) => g.id !== genero.id));
+        toast.success('Gênero removido com sucesso!');
       })
-      .catch((error) => console.error("Erro ao remover gênero:", error));
+      .catch((error) => {
+        console.error("Erro ao remover gênero:", error)
+        toast.error('Existem filmes associados a este gênero!');
+      });
   }
-
   return (
     <div className="min-h-screen bg-white p-8 flex flex-col items-center">
       <h1 className="text-center mt-5 font-extrabold text-3xl text-gray-800">Gênero de Filmes</h1>
+      <Toaster position="top-center" />
       <div className="flex justify-end w-full mb-5">
         <Link href="/genero/novo">
           <div className="transition duration-300 hover:bg-blue-500 hover:border-blue-700 border border-blue-700 bg-blue-800 shadow-lg rounded-lg text-white text-lg py-2 px-4 cursor-pointer">

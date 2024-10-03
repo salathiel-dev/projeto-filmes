@@ -2,6 +2,7 @@
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import { useRouter } from "next/router";
+import {toast, Toaster} from "react-hot-toast";
 
 export default function Home() {
   const [filmes, setFilmes] = useState([]);
@@ -33,6 +34,7 @@ export default function Home() {
             })
             .then(() => {
                 setFilmes((prev) => prev.filter((f) => f.id !== filme.id));
+                toast.success("Filme removido com sucesso");
             })
             .catch((error) => console.log("Erro ao remover filme", error));
     }
@@ -40,6 +42,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-blue-40 p-8">
        <h1 className="text-center mt-5 font-extrabold text-3xl text-black-800">Filmes</h1>
+        <Toaster position="top-center" />
       <div className="flex justify-end mb-5">
         <Link href="/filmes/novo">
           <div className="transition duration-300 hover:bg-blue-500 hover:border-blue-700 border border-blue-700 bg-blue-800 shadow-lg rounded-lg text-white text-lg py-2 px-4">

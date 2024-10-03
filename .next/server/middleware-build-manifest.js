@@ -38,6 +38,11 @@ self.__BUILD_MANIFEST = {
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/genero.js"
+    ],
+    "/genero/editar/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/genero/editar/[id].js"
     ]
   },
   "ampFirstPages": []

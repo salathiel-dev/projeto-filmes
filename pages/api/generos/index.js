@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import {toast} from "react-hot-toast";
 
 const prisma = new PrismaClient();
 
@@ -63,6 +64,10 @@ export default async function handler(req, res) {
             return res.status(400).json({ message: 'O ID do gênero é obrigatório' });
         }
         try {
+            let countFilmes = await prisma.filme.count({ where: { generoId: Number(id) } });
+            if(countFilmes > 0) {
+                throw new Error ('Existem filmes associados a este gênero');
+            }
             await prisma.genero.delete({
                 where: { id: Number(id) },
             });
@@ -71,7 +76,7 @@ export default async function handler(req, res) {
             console.error('Erro ao deletar gênero:', error);
             res.status(500).json({ error: 'Erro ao deletar gênero', details: error.message });
         }
-    } 
+    }
     else {
         res.setHeader('Allow', ['POST', 'GET', 'PUT', 'DELETE']);
         res.status(405).end(`Método ${req.method} não permitido`);

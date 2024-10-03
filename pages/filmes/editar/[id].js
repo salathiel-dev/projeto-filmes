@@ -93,7 +93,7 @@ export default function EditarFilme() {
   return (
     <main className="min-h-screen bg-gradient-to-r from-gary-400 to-gray-600 p-8 flex items-center justify-center">
     <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-        <Toaster position="top-right" />
+        <Toaster position="top-center" />
       <h1 className="text-center mb-6 font-extrabold text-2xl text-gray-800">Editar Filmes</h1>
 
 
