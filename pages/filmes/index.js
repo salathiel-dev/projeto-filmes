@@ -17,11 +17,6 @@ export default function Home() {
         fetchFilmes().then(() => console.log("Filmes carregados"));
     }, []);
 
-    function handleAdd() {
-        console.log("Adicionar filme");
-        router.push("/filmes/novo");
-    }
-
     function handleEdit(filme) {
         console.log("Editar filme", filme);
         router.push(`/filmes/editar/${filme.id}`);
@@ -51,19 +46,23 @@ export default function Home() {
             <span>Cadastrar Filme</span>
           </div>
         </Link>
+          <Link href="/">
+              <div className="ml-4 transition duration-300 hover:bg-blue-500 hover:border-blue-700 border border-blue-700 bg-blue-800 shadow-lg rounded-lg text-white text-lg py-2 px-4 cursor-pointer">
+                  <span>Retornar</span>
+              </div>
+          </Link>
       </div>
 
           <TabelaFilmes
                 filmes={filmes}
                 onEditFilme={handleEdit}
-                onAdd={handleAdd}
                 onRemoveFilme={handleRemoveFilme}
           />
     </div>
   );
 }
 
-function TabelaFilmes({ filmes, onEditFilme, onAdd, onRemoveFilme }) {
+function TabelaFilmes({ filmes, onEditFilme, onRemoveFilme }) {
     return (
         <div>
             <div className="sm:flex sm:items-center">

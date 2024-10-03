@@ -68,7 +68,7 @@ export default function CadastroFilmes() {
                 toast.success('Filme cadastrado com sucesso!');
                 setTimeout(() => {
                     router.push('/filmes'); 
-                }, 2000);
+                }, 1000);
             })
             .catch((error) => {
                 console.error('Erro ao cadastrar o filme:', error);

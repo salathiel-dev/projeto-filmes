@@ -34,10 +34,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/filmes/editar/[id].js"
     ],
-    "/filmes/novo": [
+    "/genero": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/filmes/novo.js"
+      "static/chunks/pages/genero.js"
     ]
   },
   "ampFirstPages": []

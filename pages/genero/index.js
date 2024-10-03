@@ -16,11 +16,6 @@ export default function Home() {
     fetchGeneros().then(() => console.log("Gêneros carregados"));
   }, []);
 
-  function handleAdd() {
-    console.log("Adicionar gênero");
-    router.push("/genero/novo");
-  }
-
   function handleEditGenero(genero) {
     router.push(`/genero/editar/${genero.id}`);
   }
@@ -49,19 +44,23 @@ export default function Home() {
             <span>Cadastrar gênero</span>
           </div>
         </Link>
+        <Link href="/">
+          <div className="ml-4 transition duration-300 hover:bg-blue-500 hover:border-blue-700 border border-blue-700 bg-blue-800 shadow-lg rounded-lg text-white text-lg py-2 px-4 cursor-pointer">
+            <span>Retornar</span>
+          </div>
+        </Link>
       </div>
 
       <TabelaGeneros
         generos={generos}
         onEditGenero={handleEditGenero}
-        onAdd={handleAdd}
         onRemoveGenero={handleRemoveGenero}
       />
     </div>
   );
 }
 
-function TabelaGeneros({ generos, onEditGenero, onAdd, onRemoveGenero }) {
+function TabelaGeneros({ generos, onEditGenero, onRemoveGenero }) {
   return (
     <div>
       <div className="sm:flex sm:items-center">

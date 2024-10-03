@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import {toast, Toaster} from "react-hot-toast";
 
 const schema = yup.object().shape({
   nome: yup.string().required("Nome do gênero é obrigatório"),
@@ -59,11 +60,15 @@ export default function EditarGenero() {
 
       if (response.ok) {
         const result = await response.json();
-        setSubmitSuccess("Gênero atualizado com sucesso!");
-        router.push("/genero/");
+        // setSubmitSuccess("Gênero atualizado com sucesso!");
+        toast.success('Gênero atualizado com sucesso!');
+        setTimeout(() => {
+          router.push("/genero/");
+        }, 1000);
       } else {
         const errorData = await response.json();
-        setSubmitSuccess(`Erro ao atualizar: ${errorData.message || "Erro desconhecido"}`);
+        // setSubmitSuccess(`Erro ao atualizar: ${errorData.message || "Erro desconhecido"}`);
+        toast.error(`Erro ao atualizar: ${errorData.message || "Erro desconhecido"}`);
       }
     } catch (error) {
       setSubmitSuccess(`Erro de rede: ${error.message}`);
@@ -77,6 +82,7 @@ export default function EditarGenero() {
   return (
     <main className="min-h-screen bg-gradient-to-r from-gary-400 to-gray-600 p-8 flex items-center justify-center">
     <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+        <Toaster position="top-right" />
       <h1 className="text-center mb-6 font-extrabold text-2xl text-gray-800">Editar Gênero de Filmes</h1>
 
         {submitSuccess && (
