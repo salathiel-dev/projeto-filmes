@@ -2,11 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/generos": "pages/api/generos.js",
-  "/genero/editar/[id]": "pages/genero/editar/[id].js",
   "/genero": "pages/genero.js",
-  "/filmes": "pages/filmes.js",
-  "/api/filmes": "pages/api/filmes.js",
-  "/filmes/editar/[id]": "pages/filmes/editar/[id].js"
+  "/genero/editar/[id]": "pages/genero/editar/[id].js",
+  "/filmes": "pages/filmes.js"
 }

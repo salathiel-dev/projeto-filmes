@@ -35,7 +35,6 @@ export default function Home() {
       if (response.ok) {
         const result = await response.json();
         console.log('Cadastro de gênero bem-sucedido:', result);
-        // setSubmitSuccess("Gênero cadastrado com sucesso!");
         toast.success('Gênero cadastrado com sucesso!');
         setTimeout(() => {
           router.push("/genero/");
@@ -43,12 +42,10 @@ export default function Home() {
       } else {
         const errorData = await response.json();
         console.error('Erro ao cadastrar o gênero:', errorData);
-        // setSubmitSuccess(`Erro ao cadastrar: ${errorData.message || 'Erro desconhecido'}`);
         toast.error(`Erro ao cadastrar: ${errorData.message || 'Erro desconhecido'}`);
       }
     } catch (error) {
       console.error('Erro ao realizar o request', error);
-      // setSubmitSuccess(`Erro de rede: ${error.message}`);
     }
   };
 

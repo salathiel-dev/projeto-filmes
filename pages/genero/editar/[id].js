@@ -60,14 +60,12 @@ export default function EditarGenero() {
 
       if (response.ok) {
         const result = await response.json();
-        // setSubmitSuccess("Gênero atualizado com sucesso!");
         toast.success('Gênero atualizado com sucesso!');
         setTimeout(() => {
           router.push("/genero/");
-        }, 1000);
+        }, 500);
       } else {
         const errorData = await response.json();
-        // setSubmitSuccess(`Erro ao atualizar: ${errorData.message || "Erro desconhecido"}`);
         toast.error(`Erro ao atualizar: ${errorData.message || "Erro desconhecido"}`);
       }
     } catch (error) {
