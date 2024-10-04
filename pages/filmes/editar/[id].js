@@ -71,14 +71,12 @@ export default function EditarFilme() {
 
       if (response.ok) {
         const result = await response.json();
-        // setSubmitSuccess("Filme atualizado com sucesso!");
         toast.success("Filme atualizado com sucesso!");
         setTimeout(() => {
           router.push("/filmes");
         }, 1000);
       } else {
         const errorData = await response.json();
-        // setSubmitSuccess(`Erro ao atualizar: ${errorData.message || "Erro desconhecido"}`);
         toast.error(`Erro ao atualizar: ${errorData.message || "Erro desconhecido"}`);
       }
     } catch (error) {
