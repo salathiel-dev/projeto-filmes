@@ -4,10 +4,9 @@
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
   "/api/generos": "pages/api/generos.js",
+  "/genero/editar/[id]": "pages/genero/editar/[id].js",
   "/genero": "pages/genero.js",
-  "/genero/novo": "pages/genero/novo.js",
   "/filmes": "pages/filmes.js",
   "/api/filmes": "pages/api/filmes.js",
-  "/genero/editar/[id]": "pages/genero/editar/[id].js",
   "/filmes/editar/[id]": "pages/filmes/editar/[id].js"
 }
